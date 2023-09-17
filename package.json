@@ -9,5 +9,8 @@
   "dependencies": {
     "terser": "^5.19.4"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^8.49.0"
+  }
 }
