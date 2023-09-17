@@ -13,5 +13,4 @@
     }
     return origOpen(url, target, features);
   }
-  console.log("Hello world");
 })()
