@@ -5,5 +5,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Marcell Perger",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "terser": "^5.19.4"
+  }
 }
