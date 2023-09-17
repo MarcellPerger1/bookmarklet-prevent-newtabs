@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build
+
+on:
+  push:
+    branches: [ main, "**workflow**" ]
+  pull_request:
+    branches: [ main, "**workflow**" ]
+
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+          cache: npm
+          cache-dependency-path: ./package-lock.json
+      - name: Install pakages
+        run: npm ci
+      
+      - name: Run eslint
+        run: ./node_modules/.bin/eslint --max-warnings 0 ./
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+          
+      - name: Setup nodejs
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+          cache: npm
+          cache-dependency-path: ./package-lock.json
+      - name: Install pacakges
+        run: npm ci
+
+      - name: Run nodejs build
+        run: node ./src/build.js
+        
+      - name: Commit build
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Build bookmarklet
